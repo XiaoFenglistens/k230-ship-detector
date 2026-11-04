@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 数据与权重（体积大 / 有独立许可）
+datasets/
+runs/
+*.pt
+*.onnx
+!models/*.kmodel
+
+# 板端临时产物
+tmp/
+*.log
+
+# 编辑器
+.vscode/
+.idea/
+.DS_Store

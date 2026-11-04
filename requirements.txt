@@ -1,0 +1,13 @@
+# 训练与量化（Python 3.10；torch 请按自己的 CUDA 版本装，勿用清华源默认 CPU 包）
+ultralytics>=8.4.0
+numpy>=1.24
+opencv-python>=4.8
+pillow>=10.0
+matplotlib>=3.7
+onnx>=1.16
+onnxslim>=0.1.30
+onnxruntime>=1.17
+pyserial>=3.5
+# nncase 2.11.0 与 nncase_kpu 2.11.0 请装本地 wheel（Windows 版 kpu 只能从 GitHub release 取）
+# nncase==2.11.0
+# nncase-kpu==2.11.0
