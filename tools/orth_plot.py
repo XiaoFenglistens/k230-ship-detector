@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """正交实验三张图：8 组召回柱状图 + 目标像素/视角/亮度 三条趋势线。"""
 import json

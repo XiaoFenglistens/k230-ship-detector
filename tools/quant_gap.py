@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """

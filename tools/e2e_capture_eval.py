@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """拍屏端到端逐框评测：把原图 GT 用单应性投影到照片坐标系，再与板端真实输出逐框算 IoU。
 

@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """
 B 实验：拍摄条件 -> 检出率曲线

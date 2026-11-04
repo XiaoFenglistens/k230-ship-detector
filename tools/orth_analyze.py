@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """拍屏正交实验分析：距离(近/远) × 视角(正对/偏斜) × 光照(正常/昏暗)，2×2×2 = 8 组。
 

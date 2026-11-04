@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """
 速度分解图：把一帧的耗时按「取流 / 预处理(ai2d) / KPU推理 / 后处理 / 画框 / 显示」堆叠起来。

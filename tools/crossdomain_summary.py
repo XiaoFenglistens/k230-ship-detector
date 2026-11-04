@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """
 汇总 runs\crossdomain\*.json 成一张跨域对比表 + 柱状图 + 可直接贴进文档的 Markdown 表。

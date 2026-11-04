@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """对比板端 20 类检测与 PC 参照：数量、类别一致率、逐框 IoU。"""
 import glob

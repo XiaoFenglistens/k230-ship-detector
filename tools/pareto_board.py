@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """
 板端测速编排：把 4 档输入尺寸的 bench 脚本跑一遍，收集 fps / 单帧推理耗时。

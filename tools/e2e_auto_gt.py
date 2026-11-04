@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """拍屏端到端评测（用自动连拍的 a 图，已证实与推理帧对齐到 ~1px）。
 

@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """
 跨域评测：拿一个 COCO 标注的外部数据集，评估我们训好的船舶检测模型。

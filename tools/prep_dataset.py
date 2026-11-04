@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 """数据集处理一键流程
 
 目标:把 YOLO-OBB(旋转框) 的 SODA-A ship 数据集,转成可直接训练的

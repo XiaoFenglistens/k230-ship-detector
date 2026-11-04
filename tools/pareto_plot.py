@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """
 精度-速度帕累托曲线：把 320 / 416 / 512 / 640 四档的「板上实测帧率」与「验证集 mAP」画在一张图上。

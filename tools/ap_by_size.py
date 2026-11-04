@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """
 按目标尺寸分桶算 AP50 —— 回答「我的模型在哪类目标上强、哪类弱」

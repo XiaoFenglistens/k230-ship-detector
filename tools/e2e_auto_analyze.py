@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """分析自动连拍：a→b 的板子位移 与 框相对 a/b 的偏移。
 

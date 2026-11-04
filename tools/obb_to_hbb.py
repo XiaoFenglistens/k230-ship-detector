@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 """YOLO-OBB(旋转框) -> YOLO 水平框(axis-aligned) 转换
 
 背景:

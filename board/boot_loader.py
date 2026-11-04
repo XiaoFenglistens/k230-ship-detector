@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 # 开机启动引导：运行 /sdcard/main.py
 # 用法：在 CanMV IDE 里打开 /sdcard/boot.py，全选删除，粘贴本文件全部内容，保存。

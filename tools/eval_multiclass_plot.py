@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """从 yolo val 的日志里解析「逐类 AP 表」，画柱状图并写 JSON。
 

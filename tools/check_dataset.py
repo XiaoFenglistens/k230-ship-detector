@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 """YOLO 数据集校验 + 可视化
 
 用途:训练前确认标注格式正确、坐标落在正确位置。

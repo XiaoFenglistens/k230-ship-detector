@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """正交实验二次汇总：剔除「按下瞬间」那一对，做三因素趋势 + 质量诊断。
 
