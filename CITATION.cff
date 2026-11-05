@@ -7,7 +7,7 @@ abstract: >-
   运行 nncase 2.11 编译的 int8 量化 kmodel 模型，支持 20 类遥感地物检测、
   单类别过滤、触摸交互界面、拍照与逐目标坐标导出、识别历史记录。
   项目同时包含完整的训练、量化、评测与实验分析脚本。
-version: 1.0.1
+version: 1.0.2
 date-released: "2026-11-05"
 license: MIT
 repository-code: "https://github.com/XiaoFenglistens/k230-ship-detector"
