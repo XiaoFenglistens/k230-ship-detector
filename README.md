@@ -5,6 +5,8 @@
 
 **English**: End-to-end ship detection on a Kendryte K230D (RISC-V, 128 MB RAM, CanMV MicroPython) with a 800×480 MIPI LCD. Includes dataset conversion (OBB→HBB), YOLOv8n training, nncase int8 quantization, a three-channel camera pipeline that can *both* detect and save clean photos, cross-domain and failure analysis, and a 20-class extension.
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23976727.svg)](https://doi.org/10.5281/zenodo.23976727)　[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 > **关于本项目的开发方式**：本项目由作者选题、定方向、做验收与全部硬件实机操作；**绝大部分代码实现、训练/评测脚本、实验数据分析与文档撰写由 AI 编程助手 [DeepSeek Harness](https://github.com/deepseek-ai) 完成**（人在环：每一步由作者确认、跑错由作者发现并纠正）。项目里所有数字均为真机实测，包括对自己前期错误结论的推翻记录（见 [`docs/补充实验-失败分析与量化代价.md`](docs/补充实验-失败分析与量化代价.md)）。
 
 ---
@@ -152,6 +154,26 @@ models/     int8 kmodel（416 单类、512 单类、20 类）
 ## 许可
 
 代码：MIT（见 `LICENSE`）。模型权重：随仓库以 MIT 分发，但**训练数据（SODA-A / DOTA / DIOR / HRSID）各有自己的许可**，商用前请自行核对。
+
+## 引用
+
+如果本项目的代码、模型或实验结论对你的工作有帮助，可以这样引用（任何版本都用**概念 DOI**，它会自动指向最新版）：
+
+```bibtex
+@software{guo_k230_ship_detector_2026,
+  author    = {郭, 力玮},
+  title     = {K230 边缘端遥感地物检测与中文触摸交互系统},
+  year      = {2026},
+  publisher = {Zenodo},
+  version   = {v1.0.2},
+  doi       = {10.5281/zenodo.23976727},
+  url       = {https://github.com/XiaoFenglistens/k230-ship-detector}
+}
+```
+
+- 概念 DOI（永远指向最新版）：[10.5281/zenodo.23976727](https://doi.org/10.5281/zenodo.23976727)
+- 本版本 DOI（固定指 v1.0.2）：[10.5281/zenodo.23976728](https://zenodo.org/records/23976728)
+- 归档快照：[https://zenodo.org/records/23976728](https://zenodo.org/records/23976728)
 
 ## 致谢
 
