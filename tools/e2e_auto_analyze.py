@@ -10,6 +10,8 @@
 
 用法：python tools\e2e_auto_analyze.py
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import glob
 import json
 import os
@@ -18,9 +20,9 @@ import cv2
 import numpy as np
 from ultralytics import YOLO
 
-AUTO_DIR = r'D:\rs-yolo\tmp\auto'
-MODEL = r'D:\rs-yolo\runs\ship_512_v1\weights\best.pt'
-OUT = r'D:\rs-yolo\runs\capture_e2e'
+AUTO_DIR = _os.path.join(KROOT, 'tmp', 'auto')
+MODEL = _os.path.join(KROOT, 'runs', 'ship_512_v1', 'weights', 'best.pt')
+OUT = _os.path.join(KROOT, 'runs', 'capture_e2e')
 IMGSZ = 512
 CONF = 0.30
 NMS_IOU = 0.45

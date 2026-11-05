@@ -2,6 +2,8 @@
 # SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """正交实验三张图：8 组召回柱状图 + 目标像素/视角/亮度 三条趋势线。"""
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import json
 import os
 
@@ -10,7 +12,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
-RUN = r'D:\rs-yolo\runs\orth'
+RUN = _os.path.join(KROOT, 'runs', 'orth')
 D = json.load(open(os.path.join(RUN, 'orth_summary.json'), encoding='utf-8'))
 G = D['groups']
 

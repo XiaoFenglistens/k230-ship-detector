@@ -25,6 +25,8 @@ YOLOv8 ONNX -> K230 kmodel 转换脚本（nncase 2.11.0）
   python tools\\convert_kmodel.py --calibrate KLD --out ...\\best_kld.kmodel
   python tools\\convert_kmodel.py --calibrate KLD --nsamp 120 --out ...\\best_kld120.kmodel
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 
 import os
 import sys
@@ -54,10 +56,10 @@ def _arg(name, default):
     return default
 
 
-RUN_DIR = _arg("--run", r"D:\rs-yolo\runs\ship_416_v1")
+RUN_DIR = _arg("--run", _os.path.join(KROOT, 'runs', 'ship_416_v1'))
 ONNX = os.path.join(RUN_DIR, "weights", "best.onnx")
 OUT = _arg("--out", os.path.join(RUN_DIR, "weights", "best.kmodel"))
-CALIB = _arg("--calib", r"D:\rs-yolo\calib")
+CALIB = _arg("--calib", _os.path.join(KROOT, 'calib'))
 SIZE = int(_arg("--size", "416"))
 NSAMP = int(_arg("--nsamp", "60"))
 CALIBRATE = _arg("--calibrate", "NoClip")     # NoClip / KLD / EasyQuant

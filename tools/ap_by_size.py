@@ -12,6 +12,8 @@ buckets（按 800x800 原图上的等效边长 sqrt(w*h) 分）：
 
 输出 runs/ap_by_size_416.json / _640.json
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import json
 import os
 import sys
@@ -20,9 +22,9 @@ import numpy as np
 import torch
 from ultralytics import YOLO
 
-VAL_IMG = r"D:\rs-yolo\datasets\sodaa_ship_hbb\images\val"
-VAL_LBL = r"D:\rs-yolo\datasets\sodaa_ship_hbb\labels\val"
-OUT_DIR = r"D:\rs-yolo\runs"
+VAL_IMG = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'images', 'val')
+VAL_LBL = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'labels', 'val')
+OUT_DIR = _os.path.join(KROOT, 'runs')
 
 BUCKETS = [("tiny", 0, 8), ("small", 8, 16), ("medium", 16, 32), ("large", 32, 1e9)]
 CONF = 0.001          # AP 需要完整 PR 曲线，置信度放到很低
@@ -141,8 +143,8 @@ def run(weights, imgsz, tag):
 
 if __name__ == "__main__":
     jobs = [
-        (r"D:\rs-yolo\runs\ship_416_v1\weights\best.pt", 416, "416"),
-        (r"D:\rs-yolo\runs\ship_640_v1\weights\best.pt", 640, "640"),
+        (_os.path.join(KROOT, 'runs', 'ship_416_v1', 'weights', 'best.pt'), 416, "416"),
+        (_os.path.join(KROOT, 'runs', 'ship_640_v1', 'weights', 'best.pt'), 640, "640"),
     ]
     allres = {}
     for w, s, tag in jobs:

@@ -14,6 +14,8 @@
 
 用法：python tools\orth_analyze.py
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import csv
 import glob
 import json
@@ -26,10 +28,10 @@ import numpy as np
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from e2e_auto_gt import load_gt, match, project_gt  # noqa: E402
 
-ORTH_DIR = r'D:\rs-yolo\tmp\orth'
-SRC_IMG = r'D:\rs-yolo\datasets\sodaa_ship_hbb\images\val\00063__800__0___0.jpg'
-SRC_LBL = r'D:\rs-yolo\datasets\sodaa_ship_hbb\labels\val\00063__800__0___0.txt'
-OUT = r'D:\rs-yolo\runs\orth'
+ORTH_DIR = _os.path.join(KROOT, 'tmp', 'orth')
+SRC_IMG = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'images', 'val', '00063__800__0___0.jpg')
+SRC_LBL = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'labels', 'val', '00063__800__0___0.txt')
+OUT = _os.path.join(KROOT, 'runs', 'orth')
 MODEL_IN = 512
 
 # 操作卡顺序（固定）：会话号 -> (距离, 视角, 光照)

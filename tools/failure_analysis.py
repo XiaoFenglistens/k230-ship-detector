@@ -9,6 +9,8 @@
 用法：
     python tools\failure_analysis.py --n 200
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 
 import os
 import sys
@@ -20,10 +22,10 @@ import numpy as np
 import cv2
 from ultralytics import YOLO
 
-MODEL = r"D:\rs-yolo\runs\ship_416_v1\weights\best.pt"
-IMG_DIR = r"D:\rs-yolo\datasets\sodaa_ship_hbb\images\val"
-LBL_DIR = r"D:\rs-yolo\datasets\sodaa_ship_hbb\labels\val"
-OUT_DIR = r"D:\rs-yolo\runs\failure_analysis"
+MODEL = _os.path.join(KROOT, 'runs', 'ship_416_v1', 'weights', 'best.pt')
+IMG_DIR = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'images', 'val')
+LBL_DIR = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'labels', 'val')
+OUT_DIR = _os.path.join(KROOT, 'runs', 'failure_analysis')
 SIZE = 416
 CONF = 0.30
 

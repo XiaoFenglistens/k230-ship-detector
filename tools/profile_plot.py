@@ -4,11 +4,13 @@
 """
 速度分解图：把一帧的耗时按「取流 / 预处理(ai2d) / KPU推理 / 后处理 / 画框 / 显示」堆叠起来。
 
-数据来源：D:\\rs-yolo\\runs\\profile_breakdown.json（板端 prof*.py 实测，每档 60 帧取均值）
+数据来源：<K230_ROOT> prof*.py 实测，每档 60 帧取均值）
 
 用法：
   python tools\\profile_plot.py
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import json
 import os
 
@@ -17,7 +19,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
-RUNS = r"D:\rs-yolo\runs"
+RUNS = _os.path.join(KROOT, 'runs')
 SRC = os.path.join(RUNS, "profile_breakdown.json")
 OUT = os.path.join(RUNS, "profile_breakdown.png")
 

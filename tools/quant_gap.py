@@ -9,6 +9,8 @@
 用法：
     python tools\quant_gap.py --n 60
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 
 import os
 import sys
@@ -31,12 +33,12 @@ import nncase
 import nncase_kpu  # noqa
 import onnxruntime as ort
 
-ROOT = r"D:\rs-yolo\runs\ship_416_v1\weights"
+ROOT = _os.path.join(KROOT, 'runs', 'ship_416_v1', 'weights')
 KMODEL = os.path.join(ROOT, "best.kmodel")
 ONNX = os.path.join(ROOT, "best.onnx")
-IMG_DIR = r"D:\rs-yolo\datasets\sodaa_ship_hbb\images\val"
-LBL_DIR = r"D:\rs-yolo\datasets\sodaa_ship_hbb\labels\val"
-OUT = r"D:\rs-yolo\runs\quant_gap.json"
+IMG_DIR = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'images', 'val')
+LBL_DIR = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'labels', 'val')
+OUT = _os.path.join(KROOT, 'runs', 'quant_gap.json')
 
 SIZE = 416
 NC = 1

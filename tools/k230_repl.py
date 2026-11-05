@@ -12,6 +12,8 @@
 注意：CanMV IDE 打开着串口时本脚本会拿不到句柄（PermissionError），
       需要先在 IDE 里断开连接。
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import sys
 import time
 
@@ -241,8 +243,8 @@ def main():
             import os as _os
             import tempfile
 
-            tmp = _os.path.join(r"D:\rs-yolo\tmp", "_speedtest.bin")
-            _os.makedirs(r"D:\rs-yolo\tmp", exist_ok=True)
+            tmp = _os.path.join(_os.path.join(KROOT, 'tmp'), "_speedtest.bin")
+            _os.makedirs(_os.path.join(KROOT, 'tmp'), exist_ok=True)
             blob = bytes(bytearray(range(256))) * 1024  # 256KB
             open(tmp, "wb").write(blob)
             print("测试文件 %d 字节，chunk=%s" % (len(blob), args[1] if len(args) > 1 else "4096"))

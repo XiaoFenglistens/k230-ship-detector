@@ -3,15 +3,17 @@
 # -*- coding: utf-8 -*-
 """正交实验二次汇总：剔除「按下瞬间」那一对，做三因素趋势 + 质量诊断。
 
-输入 D:\\rs-yolo\\runs\\orth\\orth_eval.json
-输出 D:\\rs-yolo\\runs\\orth\\orth_summary.json / orth_fit.json / orth_curve.png
+输入 <K230_ROOT>
+输出 <K230_ROOT> / orth_fit.json / orth_curve.png
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import json
 import os
 
 import numpy as np
 
-RUN = r'D:\rs-yolo\runs\orth'
+RUN = _os.path.join(KROOT, 'runs', 'orth')
 SRC = os.path.join(RUN, 'orth_eval.json')
 
 # 只保留稳定对（b 对），a 对是按下瞬间仍在动的那一张

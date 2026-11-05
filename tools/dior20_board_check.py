@@ -2,15 +2,17 @@
 # SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """对比板端 20 类检测与 PC 参照：数量、类别一致率、逐框 IoU。"""
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import glob
 import json
 import os
 
 import numpy as np
 
-BOARD = r'D:\rs-yolo\tmp\dior_board'
-PC = r'D:\rs-yolo\runs\dior20_pc_ref.json'
-OUT = r'D:\rs-yolo\runs\dior20_board_check.json'
+BOARD = _os.path.join(KROOT, 'tmp', 'dior_board')
+PC = _os.path.join(KROOT, 'runs', 'dior20_pc_ref.json')
+OUT = _os.path.join(KROOT, 'runs', 'dior20_board_check.json')
 
 
 def iou(a, b):

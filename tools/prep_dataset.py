@@ -15,9 +15,11 @@
       labels/train,val/  转换后的水平框标注
 
 用法:
-    python prep_dataset.py --src D:\\rs-yolo\\datasets\\sodaa_ship
+    python prep_dataset.py --src <K230_ROOT>
     python prep_dataset.py --src <dir> --only-check      # 只校验不转换
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import argparse
 import os
 import shutil
@@ -151,7 +153,7 @@ def main():
     print("  转换后正框:", os.path.join(dst, "_vis_hbb"))
     print("重点看:正框是否正好包住船体、有没有框到大片空白/岸边。")
     print("\n确认无误后开始训练:")
-    print(f'  D:\\rs-yolo\\venv\\Scripts\\yolo.exe task=detect mode=train '
+    print(f'  <K230_ROOT> task=detect mode=train '
           f'model=yolov8n.pt data="{hbb_yaml}" epochs=100 imgsz=320 batch=16')
     print("=" * 70)
 

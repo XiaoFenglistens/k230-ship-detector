@@ -4,28 +4,30 @@
 """DIOR (COCO 标注) -> YOLO 多类数据集。
 
 用法：
-    python tools\dior_to_yolo.py --build        # 建 D:\rs-yolo\datasets\dior20
+    python tools\dior_to_yolo.py --build        # 建 <K230_ROOT>
     python tools\dior_to_yolo.py --check        # 只统计不写盘
 
 输入：
-    D:\rs-yolo\datasets\crossdomain\dior\labels\COCO_labels\{train,val}.json
-    D:\rs-yolo\datasets\crossdomain\dior\val\val\images\*.jpg        （val 图）
-    D:\rs-yolo\datasets\crossdomain\dior\train\train\images\*.jpg    （train 图，train.zip 解压后）
+    <K230_ROOT>
+    <K230_ROOT>        （val 图）
+    <K230_ROOT>    （train 图，train.zip 解压后）
 
 输出：
-    D:\rs-yolo\datasets\dior20\images\{train,val}\*.jpg
-    D:\rs-yolo\datasets\dior20\labels\{train,val}\*.txt
-    D:\rs-yolo\datasets\dior20\data.yaml
+    <K230_ROOT>
+    <K230_ROOT>
+    <K230_ROOT>
 """
+import os as _os
+KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import argparse
 import json
 import os
 import shutil
 import sys
 
-DIOR = r'D:\rs-yolo\datasets\crossdomain\dior'
+DIOR = _os.path.join(KROOT, 'datasets', 'crossdomain', 'dior')
 COCO = os.path.join(DIOR, 'labels', 'COCO_labels')
-OUT = r'D:\rs-yolo\datasets\dior20'
+OUT = _os.path.join(KROOT, 'datasets', 'dior20')
 
 # 图像目录候选（zip 内自带一层同名目录，两种布局都试）
 IMG_DIRS = {
