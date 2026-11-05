@@ -25,7 +25,9 @@ keywords:
   - int8 quantization
   - MicroPython
 authors:
-  - name: "XiaoFenglistens"
+  - family-names: 郭
+    given-names: 力玮
+    alias: XiaoFenglistens
     website: "https://github.com/XiaoFenglistens"
 identifiers:
   - type: doi

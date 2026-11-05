@@ -161,7 +161,7 @@ models/     int8 kmodel（416 单类、512 单类、20 类）
 
 ```bibtex
 @software{guo_k230_ship_detector_2026,
-  author    = {XiaoFenglistens},
+  author    = {郭, 力玮},
   title     = {K230 边缘端遥感地物检测与中文触摸交互系统},
   year      = {2026},
   publisher = {Zenodo},
