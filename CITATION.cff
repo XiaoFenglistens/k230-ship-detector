@@ -10,7 +10,6 @@ abstract: >-
 version: 1.0.2
 doi: "10.5281/zenodo.23976728"
 date-released: 2026-11-05
-date-released: "2026-11-05"
 license: MIT
 repository-code: "https://github.com/XiaoFenglistens/k230-ship-detector"
 url: "https://github.com/XiaoFenglistens/k230-ship-detector"
@@ -26,9 +25,7 @@ keywords:
   - int8 quantization
   - MicroPython
 authors:
-  - family-names: 郭
-    given-names: 力玮
-    alias: XiaoFenglistens
+  - name: "XiaoFenglistens"
     website: "https://github.com/XiaoFenglistens"
 identifiers:
   - type: doi
