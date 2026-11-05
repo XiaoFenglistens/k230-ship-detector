@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "如果本软件或其成果对你的工作有帮助，请按下列信息引用。"
+title: "K230 边缘端遥感地物检测与中文触摸交互系统"
+abstract: >-
+  面向 K230D（庐山派 Lite）边缘计算开发板的一套遥感地物实时检测系统。
+  板端使用 CanMV MicroPython 自建三通道图像架构（显示 / 拍照 / 推理分离），
+  运行 nncase 2.11 编译的 int8 量化 kmodel 模型，支持 20 类遥感地物检测、
+  单类别过滤、触摸交互界面、拍照与逐目标坐标导出、识别历史记录。
+  项目同时包含完整的训练、量化、评测与实验分析脚本。
+version: 1.0.1
+date-released: "2026-11-05"
+license: MIT
+repository-code: "https://github.com/XiaoFenglistens/k230-ship-detector"
+url: "https://github.com/XiaoFenglistens/k230-ship-detector"
+keywords:
+  - K230
+  - CanMV
+  - RISC-V
+  - edge AI
+  - object detection
+  - remote sensing
+  - YOLOv8
+  - nncase
+  - int8 quantization
+  - MicroPython
+authors:
+  - family-names: 郭
+    given-names: 力玮
+    alias: XiaoFenglistens
+    website: "https://github.com/XiaoFenglistens"
