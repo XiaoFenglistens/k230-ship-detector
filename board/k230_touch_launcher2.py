@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: 2026 XiaoFenglistens
+# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """K230 触摸启动器 v2 —— 20 类遥感目标检测
 
