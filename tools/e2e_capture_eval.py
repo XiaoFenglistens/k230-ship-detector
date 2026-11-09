@@ -4,20 +4,18 @@
 """拍屏端到端逐框评测：把原图 GT 用单应性投影到照片坐标系，再与板端真实输出逐框算 IoU。
 
 输入：
-  <K230_ROOT>          干净照片（无绘制）
-  <K230_ROOT>         板端同帧输出（x,y,w,h 为 800x480 坐标）
+  D:\\rs-yolo\\tmp\\CAP_0005.jpg          干净照片（无绘制）
+  D:\\rs-yolo\\tmp\\img_0005.json         板端同帧输出（x,y,w,h 为 800x480 坐标）
   datasets\\sodaa_ship_hbb\\images\\val\\00063__800__0___0.jpg   源图
   datasets\\sodaa_ship_hbb\\labels\\val\\00063__800__0___0.txt   GT
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import cv2, json, numpy as np, os
 
-PHOTO = _os.path.join(KROOT, 'tmp', 'CAP_0005.jpg')
-DETS = _os.path.join(KROOT, 'tmp', 'img_0005.json')
-SRC_IMG = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'images', 'val', '00063__800__0___0.jpg')
-SRC_LBL = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'labels', 'val', '00063__800__0___0.txt')
-OUT = _os.path.join(KROOT, 'runs', 'capture_e2e')
+PHOTO = r'D:\rs-yolo\tmp\CAP_0005.jpg'
+DETS = r'D:\rs-yolo\tmp\img_0005.json'
+SRC_IMG = r'D:\rs-yolo\datasets\sodaa_ship_hbb\images\val\00063__800__0___0.jpg'
+SRC_LBL = r'D:\rs-yolo\datasets\sodaa_ship_hbb\labels\val\00063__800__0___0.txt'
+OUT = r'D:\rs-yolo\runs\capture_e2e'
 os.makedirs(OUT, exist_ok=True)
 IOU_T = 0.5
 

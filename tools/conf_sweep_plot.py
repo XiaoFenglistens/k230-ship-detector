@@ -10,8 +10,6 @@
 
 用法：python tools\\conf_sweep_plot.py
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import json
 import os
 
@@ -20,7 +18,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
-RUNS = _os.path.join(KROOT, 'runs')
+RUNS = r"D:\rs-yolo\runs"
 OUT = os.path.join(RUNS, "conf_sweep.png")
 DEPLOYED = 0.30
 

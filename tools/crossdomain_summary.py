@@ -7,13 +7,11 @@
 用法：
   python tools\\crossdomain_summary.py
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import glob
 import json
 import os
 
-OUT = _os.path.join(KROOT, 'runs', 'crossdomain')
+OUT = r"D:\rs-yolo\runs\crossdomain"
 
 # 同域基线（已知，来自 results.csv）
 BASELINE = [

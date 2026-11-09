@@ -10,8 +10,6 @@
 
 用法：python tools\e2e_auto_gt.py
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import glob
 import json
 import os
@@ -19,10 +17,10 @@ import os
 import cv2
 import numpy as np
 
-AUTO_DIR = _os.path.join(KROOT, 'tmp', 'auto')
-SRC_IMG = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'images', 'val', '00063__800__0___0.jpg')
-SRC_LBL = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'labels', 'val', '00063__800__0___0.txt')
-OUT = _os.path.join(KROOT, 'runs', 'capture_e2e')
+AUTO_DIR = r'D:\rs-yolo\tmp\auto'
+SRC_IMG = r'D:\rs-yolo\datasets\sodaa_ship_hbb\images\val\00063__800__0___0.jpg'
+SRC_LBL = r'D:\rs-yolo\datasets\sodaa_ship_hbb\labels\val\00063__800__0___0.txt'
+OUT = r'D:\rs-yolo\runs\capture_e2e'
 IOU_THR = 0.5
 VIS_THR = 0.4
 

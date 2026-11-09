@@ -1,5 +1,3 @@
-# SPDX-FileCopyrightText: 2026 XiaoFenglistens
-# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """K230 触摸启动器 v2 —— 20 类遥感目标检测
 
@@ -26,7 +24,7 @@ from libs.YOLO import YOLOv8
 DISPLAY_SIZE = [800, 480]
 RGB888P_SIZE = [800, 480]
 MODEL_INPUT_SIZE = [416, 416]
-KMODEL_PATH = "/sdcard/dior20.kmodel"
+KMODEL_PATH = "/sdcard/dior20_a16.kmodel"
 
 CONF_THRESH = 0.30
 NMS_THRESH = 0.45
@@ -35,6 +33,17 @@ GC_INTERVAL = 4
 JPEG_QUALITY = 90
 
 SAVE_DIRS = ["/sdcard/photo", "/sdcard", "/data"]
+
+# ---- 边缘按钮统一往内收（贴近屏幕边缘时触摸容易点不中）----
+EDGE_TOP = 12
+EDGE_RIGHT = 16
+EDGE_BOTTOM = 22
+EDGE_LEFT = 18
+EXIT_RECT = (DISPLAY_SIZE[0] - EDGE_RIGHT - 124, EDGE_TOP, 124, 46)
+BACK_RECT = (DISPLAY_SIZE[0] - EDGE_RIGHT - 152, EDGE_TOP, 152, 46)
+PHOTO_RECT = (EDGE_LEFT, DISPLAY_SIZE[1] - EDGE_BOTTOM - 56, 196, 56)
+MENU_RECT = (DISPLAY_SIZE[0] - EDGE_RIGHT - 2 - 196, DISPLAY_SIZE[1] - EDGE_BOTTOM - 56, 196, 56)
+
 HISTORY_PATH = "/sdcard/det_history.txt"
 
 BUTTON_PIN = 64
@@ -403,10 +412,10 @@ def draw_home(osd, free_kb, sd_mb, n_hist, armed=False):
     osd.draw_rectangle(206, 68, 388, 26, color=CARD, fill=True)
     text_center(osd, 400, 73, "20 类地物   416x416   触摸开始", 15, GREY)
 
-    osd.draw_rectangle(676, 0, 122, 52, color=(90, 34, 34) if armed else CARD, fill=True)
-    osd.draw_rectangle(676, 0, 122, 52, color=RED if armed else LINE,
+    osd.draw_rectangle(EXIT_RECT[0], EXIT_RECT[1], EXIT_RECT[2], EXIT_RECT[3], color=(90, 34, 34) if armed else CARD, fill=True)
+    osd.draw_rectangle(EXIT_RECT[0], EXIT_RECT[1], EXIT_RECT[2], EXIT_RECT[3], color=RED if armed else LINE,
                        thickness=2 if armed else 1)
-    text_center(osd, 737, 14, "退出", 20, WHITE)
+    text_center(osd, EXIT_RECT[0] + EXIT_RECT[2] // 2, EXIT_RECT[1] + (EXIT_RECT[3] - 20) // 2, "退出", 20, WHITE)
     osd.draw_rectangle(40, 106, 720, 1, color=LINE, fill=True)
 
     for i in range(len(HOME_BTNS)):
@@ -436,8 +445,8 @@ def draw_class_page(osd, sel):
     osd.clear()
     osd.draw_rectangle(0, 0, DISPLAY_SIZE[0], DISPLAY_SIZE[1], color=BG, fill=True)
     text_at(osd, 16, 12, "选择识别类别", 26, WHITE)
-    osd.draw_rectangle(636, 6, 158, 46, color=CARD_HI, fill=True)
-    text_center(osd, 715, 16, "返回", 22, WHITE)
+    osd.draw_rectangle(BACK_RECT[0], BACK_RECT[1], BACK_RECT[2], BACK_RECT[3], color=CARD_HI, fill=True)
+    text_center(osd, BACK_RECT[0] + BACK_RECT[2] // 2, BACK_RECT[1] + (BACK_RECT[3] - 22) // 2, "返回", 22, WHITE)
 
     cw = 148
     ch = 74
@@ -471,8 +480,8 @@ def draw_guide(osd, gp=0):
     osd.draw_rectangle(0, 0, DISPLAY_SIZE[0], 4, color=CYAN, fill=True)
     text_at(osd, 16, 12, "识别结果说明", 26, WHITE)
     text_at(osd, 400, 18, "%d / 2" % (gp + 1), 18, CYAN)
-    osd.draw_rectangle(636, 6, 158, 46, color=CARD_HI, fill=True)
-    text_center(osd, 715, 16, "返回", 22, WHITE)
+    osd.draw_rectangle(BACK_RECT[0], BACK_RECT[1], BACK_RECT[2], BACK_RECT[3], color=CARD_HI, fill=True)
+    text_center(osd, BACK_RECT[0] + BACK_RECT[2] // 2, BACK_RECT[1] + (BACK_RECT[3] - 22) // 2, "返回", 22, WHITE)
     osd.draw_rectangle(12, 56, 776, 1, color=LINE, fill=True)
 
     first = gp * 10
@@ -500,8 +509,8 @@ def draw_usage(osd, sd_mb):
     osd.draw_rectangle(0, 0, DISPLAY_SIZE[0], DISPLAY_SIZE[1], color=BG, fill=True)
     osd.draw_rectangle(0, 0, DISPLAY_SIZE[0], 4, color=CYAN, fill=True)
     text_at(osd, 16, 10, "设备使用说明", 26, WHITE)
-    osd.draw_rectangle(636, 6, 158, 46, color=CARD_HI, fill=True)
-    text_center(osd, 715, 16, "返回", 22, WHITE)
+    osd.draw_rectangle(BACK_RECT[0], BACK_RECT[1], BACK_RECT[2], BACK_RECT[3], color=CARD_HI, fill=True)
+    text_center(osd, BACK_RECT[0] + BACK_RECT[2] // 2, BACK_RECT[1] + (BACK_RECT[3] - 22) // 2, "返回", 22, WHITE)
     osd.draw_rectangle(12, 52, 776, 1, color=LINE, fill=True)
     lines = [
         "1. 主页点 识别内容选择 进入类别列表",
@@ -529,8 +538,8 @@ def draw_history(osd, rows, hp=0):
     osd.draw_rectangle(0, 0, DISPLAY_SIZE[0], DISPLAY_SIZE[1], color=BG, fill=True)
     osd.draw_rectangle(0, 0, DISPLAY_SIZE[0], 4, color=CYAN, fill=True)
     text_at(osd, 16, 12, "识别历史记录", 26, WHITE)
-    osd.draw_rectangle(636, 6, 158, 46, color=CARD_HI, fill=True)
-    text_center(osd, 715, 16, "返回", 22, WHITE)
+    osd.draw_rectangle(BACK_RECT[0], BACK_RECT[1], BACK_RECT[2], BACK_RECT[3], color=CARD_HI, fill=True)
+    text_center(osd, BACK_RECT[0] + BACK_RECT[2] // 2, BACK_RECT[1] + (BACK_RECT[3] - 22) // 2, "返回", 22, WHITE)
     osd.draw_rectangle(12, 56, 776, 1, color=LINE, fill=True)
 
     tot = len(rows)
@@ -593,8 +602,8 @@ def draw_detail(osd, rec, boxes, idx, total):
     if len(q) < 5:
         q = ["0", "-", "0", "0", "-"]
     text_at(osd, 16, 12, "记录 %s" % q[0], 26, WHITE)
-    osd.draw_rectangle(636, 6, 158, 46, color=CARD_HI, fill=True)
-    text_center(osd, 715, 16, "返回", 22, WHITE)
+    osd.draw_rectangle(BACK_RECT[0], BACK_RECT[1], BACK_RECT[2], BACK_RECT[3], color=CARD_HI, fill=True)
+    text_center(osd, BACK_RECT[0] + BACK_RECT[2] // 2, BACK_RECT[1] + (BACK_RECT[3] - 22) // 2, "返回", 22, WHITE)
     text_at(osd, 16, 60, "%s   %s 个目标   %s fps   %s" % (cn_of(q[1]), q[2], q[3], q[4]),
             17, CYAN)
     osd.draw_rectangle(12, 86, 776, 1, color=LINE, fill=True)
@@ -651,8 +660,8 @@ def draw_system(osd, info):
     osd.draw_rectangle(0, 0, DISPLAY_SIZE[0], DISPLAY_SIZE[1], color=BG, fill=True)
     osd.draw_rectangle(0, 0, DISPLAY_SIZE[0], 4, color=CYAN, fill=True)
     text_at(osd, 16, 10, "系统与清理", 26, WHITE)
-    osd.draw_rectangle(636, 6, 158, 46, color=CARD_HI, fill=True)
-    text_center(osd, 715, 16, "返回", 22, WHITE)
+    osd.draw_rectangle(BACK_RECT[0], BACK_RECT[1], BACK_RECT[2], BACK_RECT[3], color=CARD_HI, fill=True)
+    text_center(osd, BACK_RECT[0] + BACK_RECT[2] // 2, BACK_RECT[1] + (BACK_RECT[3] - 22) // 2, "返回", 22, WHITE)
     osd.draw_rectangle(12, 52, 776, 1, color=LINE, fill=True)
     for i in range(len(info)):
         text_at(osd, 24, 72 + i * 36, info[i], 20, WHITE if i < 2 else GREY)
@@ -669,12 +678,12 @@ def draw_detect_bar(osd, sel, shown, fps_v, toast):
     text_at(osd, 250, 6, "%d 个目标" % shown, 20, WHITE)
     text_at(osd, DISPLAY_SIZE[0] - 130, 6, "%.1f fps" % fps_v, 20, GREEN)
     by = 414
-    osd.draw_rectangle(10, by, 190, 54, color=(26, 70, 40), fill=True)
-    osd.draw_rectangle(10, by, 190, 54, color=GREEN, thickness=2)
-    text_center(osd, 105, 428, "拍照", 22, WHITE)
-    osd.draw_rectangle(600, by, 190, 54, color=(70, 30, 30), fill=True)
-    osd.draw_rectangle(600, by, 190, 54, color=RED, thickness=2)
-    text_center(osd, 695, 428, "菜单", 22, WHITE)
+    osd.draw_rectangle(PHOTO_RECT[0], PHOTO_RECT[1], PHOTO_RECT[2], PHOTO_RECT[3], color=(26, 70, 40), fill=True)
+    osd.draw_rectangle(PHOTO_RECT[0], PHOTO_RECT[1], PHOTO_RECT[2], PHOTO_RECT[3], color=GREEN, thickness=2)
+    text_center(osd, PHOTO_RECT[0] + PHOTO_RECT[2] // 2, PHOTO_RECT[1] + (PHOTO_RECT[3] - 22) // 2, "拍照", 22, WHITE)
+    osd.draw_rectangle(MENU_RECT[0], MENU_RECT[1], MENU_RECT[2], MENU_RECT[3], color=(70, 30, 30), fill=True)
+    osd.draw_rectangle(MENU_RECT[0], MENU_RECT[1], MENU_RECT[2], MENU_RECT[3], color=RED, thickness=2)
+    text_center(osd, MENU_RECT[0] + MENU_RECT[2] // 2, MENU_RECT[1] + (MENU_RECT[3] - 22) // 2, "菜单", 22, WHITE)
     if toast:
         w = text_w(toast, 20) + 40
         osd.draw_rectangle(400 - w // 2, 360, w, 40, color=(0, 0, 0), fill=True)
@@ -868,7 +877,7 @@ def main():
             if page == P_HOME:
                 if tap:
                     print("[UI] tap home %d,%d" % (tap[0], tap[1]))
-                    if in_rect(tap[0], tap[1], (676, 0, 122, 52)):
+                    if in_rect(tap[0], tap[1], EXIT_RECT):
                         if quit_armed:
                             print("[UI] quit confirmed")
                             break
@@ -899,7 +908,7 @@ def main():
             # ---------- 类别选择 ----------
             if page == P_CLASS:
                 if tap:
-                    if in_rect(tap[0], tap[1], (636, 6, 158, 46)):
+                    if in_rect(tap[0], tap[1], BACK_RECT):
                         page = P_HOME
                         continue
                     cw, ch, x0, y0, gx, gy = 148, 74, 14, 58, 6, 6
@@ -932,7 +941,7 @@ def main():
 
             # ---------- 说明 / 用法 / 系统 ----------
             if page in (P_GUIDE, P_USAGE, P_SYSTEM):
-                if tap and in_rect(tap[0], tap[1], (636, 6, 158, 46)):
+                if tap and in_rect(tap[0], tap[1], BACK_RECT):
                     page = P_HOME
                     continue
                 if page == P_SYSTEM and tap and in_rect(tap[0], tap[1], (20, 420, 260, 46)):
@@ -965,7 +974,7 @@ def main():
             # ---------- 历史 ----------
             if page == P_HISTORY:
                 if tap:
-                    if in_rect(tap[0], tap[1], (636, 6, 158, 46)):
+                    if in_rect(tap[0], tap[1], BACK_RECT):
                         page = P_HOME
                         continue
                     if in_rect(tap[0], tap[1], (20, 420, 150, 46)):
@@ -998,7 +1007,7 @@ def main():
             # ---------- 记录详情 ----------
             if page == P_DETAIL:
                 if tap:
-                    if in_rect(tap[0], tap[1], (636, 6, 158, 46)):
+                    if in_rect(tap[0], tap[1], BACK_RECT):
                         page = P_HISTORY
                         continue
                     if in_rect(tap[0], tap[1], (20, 420, 150, 46)):
@@ -1024,10 +1033,10 @@ def main():
 
             # ---------- 检测 ----------
             if tap:
-                if in_rect(tap[0], tap[1], (600, 414, 190, 54)):
+                if in_rect(tap[0], tap[1], MENU_RECT):
                     page = P_CLASS
                     continue
-                if in_rect(tap[0], tap[1], (10, 414, 190, 54)):
+                if in_rect(tap[0], tap[1], PHOTO_RECT):
                     seq, msg_text = take_photo(res_keep, shown_keep)
                     msg_until = time.ticks_add(time.ticks_ms(), 2200)
                     continue

@@ -5,14 +5,12 @@
 精度-速度帕累托曲线：把 320 / 416 / 512 / 640 四档的「板上实测帧率」与「验证集 mAP」画在一张图上。
 
 数据来源：
-  1) 精度：<K230_ROOT> mAP50-95 最高的那一轮
-  2) 速度：<K230_ROOT> bench 脚本实测写入）
+  1) 精度：D:\\rs-yolo\\runs\\ship_<size>_v1\\results.csv，取 mAP50-95 最高的那一轮
+  2) 速度：D:\\rs-yolo\\runs\\pareto_board.json（板端 bench 脚本实测写入）
 
 用法：
   python tools\\pareto_plot.py
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import json
 import os
 
@@ -21,7 +19,7 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib import font_manager
 
-RUNS = _os.path.join(KROOT, 'runs')
+RUNS = r"D:\rs-yolo\runs"
 BOARD = os.path.join(RUNS, "pareto_board.json")
 OUT = os.path.join(RUNS, "pareto_curve.png")
 SIZES = [320, 416, 512, 640]

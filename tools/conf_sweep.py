@@ -19,15 +19,13 @@
   python tools\\conf_sweep.py --model runs\\ship_416_v1\\weights\\best.pt --imgsz 416
   python tools\\conf_sweep.py --model runs\\ship_512_v1\\weights\\best.pt --imgsz 512
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import argparse
 import json
 import os
 
 import numpy as np
 
-ROOT = KROOT
+ROOT = r"D:\rs-yolo"
 VAL_IMG = os.path.join(ROOT, "datasets", "sodaa_ship_hbb", "images", "val")
 VAL_LBL = os.path.join(ROOT, "datasets", "sodaa_ship_hbb", "labels", "val")
 OUT_DIR = os.path.join(ROOT, "runs")

@@ -1,5 +1,3 @@
-# SPDX-FileCopyrightText: 2026 XiaoFenglistens
-# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """
 K230D 庐山派 Lite —— 船舶检测 + USR 按键拍照存卡

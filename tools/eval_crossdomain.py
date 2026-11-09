@@ -6,15 +6,13 @@
 
 用法：
   python tools\\eval_crossdomain.py --name hrsid_sar ^
-      --images "<K230_ROOT>" ^
-      --coco   "<K230_ROOT>" ^
-      --model  "<K230_ROOT>" ^
+      --images "D:\\rs-yolo\\datasets\\crossdomain\\hrsid_src\\HRSID_JPG\\JPEGImages" ^
+      --coco   "D:\\rs-yolo\\datasets\\crossdomain\\hrsid_src\\HRSID_JPG\\annotations\\test2017.json" ^
+      --model  "D:\\rs-yolo\\runs\\ship_416_v1\\weights\\best.pt" ^
       --imgsz 416 --limit 300
 
 输出：runs\crossdomain\<name>.json（mAP50 / mAP50-95 / P / R / 每张统计）+ 若干可视化
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import argparse
 import json
 import os
@@ -133,7 +131,7 @@ def main():
     ap.add_argument("--limit", type=int, default=0, help="只测前 N 张（0=全部）")
     ap.add_argument("--report-conf", type=float, default=0.30, help="报告 P/R 时用的置信度")
     ap.add_argument("--vis", type=int, default=6, help="保存几张可视化")
-    ap.add_argument("--outdir", default=_os.path.join(KROOT, 'runs', 'crossdomain'))
+    ap.add_argument("--outdir", default=r"D:\rs-yolo\runs\crossdomain")
     args = ap.parse_args()
 
     from ultralytics import YOLO

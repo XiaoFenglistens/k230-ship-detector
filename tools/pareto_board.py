@@ -13,8 +13,6 @@
   python tools\\pareto_board.py                # 跑全部四档
   python tools\\pareto_board.py --only 320 416 # 只跑指定档
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import argparse
 import json
 import os
@@ -22,18 +20,18 @@ import re
 import subprocess
 import sys
 
-PY = _os.path.join(KROOT, 'venv', 'Scripts', 'python.exe')
-REPL = _os.path.join(KROOT, 'tools', 'k230_repl.py')
-TMP = _os.path.join(KROOT, 'tmp')
-RUNS = _os.path.join(KROOT, 'runs')
+PY = r"D:\rs-yolo\venv\Scripts\python.exe"
+REPL = r"D:\rs-yolo\tools\k230_repl.py"
+TMP = r"D:\rs-yolo\tmp"
+RUNS = r"D:\rs-yolo\runs"
 
 # imgsz -> (本地 bench 脚本, 板上 kmodel, 本地 kmodel 来源<可能为 None>, 是否需上传)
 PLAN = {
     320: ("bench320.py", "/sdcard/bench320.kmodel",
-          _os.path.join(KROOT, 'runs', 'ship_320_v1', 'weights', 'best.kmodel')),
+          r"D:\rs-yolo\runs\ship_320_v1\weights\best.kmodel"),
     416: ("bench416.py", "/sdcard/best.kmodel", None),
     512: ("bench512.py", "/sdcard/bench512.kmodel",
-          _os.path.join(KROOT, 'runs', 'ship_512_v1', 'weights', 'best.kmodel')),
+          r"D:\rs-yolo\runs\ship_512_v1\weights\best.kmodel"),
     640: ("bench640.py", "/sdcard/best640.kmodel", None),
 }
 

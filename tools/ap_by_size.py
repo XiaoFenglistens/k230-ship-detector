@@ -12,8 +12,6 @@ buckets（按 800x800 原图上的等效边长 sqrt(w*h) 分）：
 
 输出 runs/ap_by_size_416.json / _640.json
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import json
 import os
 import sys
@@ -22,12 +20,13 @@ import numpy as np
 import torch
 from ultralytics import YOLO
 
-VAL_IMG = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'images', 'val')
-VAL_LBL = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'labels', 'val')
-OUT_DIR = _os.path.join(KROOT, 'runs')
+VAL_IMG = r"D:\rs-yolo\datasets\sodaa_ship_hbb\images\val"
+VAL_LBL = r"D:\rs-yolo\datasets\sodaa_ship_hbb\labels\val"
+OUT_DIR = r"D:\rs-yolo\runs"
 
 BUCKETS = [("tiny", 0, 8), ("small", 8, 16), ("medium", 16, 32), ("large", 32, 1e9)]
 CONF = 0.001          # AP 需要完整 PR 曲线，置信度放到很低
+RECALL_CONF = 0.30    # 部署阈值：另算该阈值下的分尺寸召回
 IOU_T = 0.5
 
 
@@ -83,6 +82,7 @@ def run(weights, imgsz, tag):
     scores = {b[0]: [] for b in BUCKETS}
     tps = {b[0]: [] for b in BUCKETS}
     ngt = {b[0]: 0 for b in BUCKETS}
+    nhit30 = {b[0]: 0 for b in BUCKETS}
 
     for i, fn in enumerate(names):
         path = os.path.join(VAL_IMG, fn)
@@ -104,6 +104,7 @@ def run(weights, imgsz, tag):
 
         M = iou_mat(pred, gt)
         used = np.zeros(len(gt), dtype=bool)
+        mscore = np.full(len(gt), -1.0, dtype=np.float32)  # 命中的预测框置信度，用于算固定阈值下的召回
         for bi, (bname, _, _) in enumerate(BUCKETS):
             ngt[bname] += int((gt_bucket == bi).sum())
 
@@ -120,6 +121,7 @@ def run(weights, imgsz, tag):
             scores[bname].append(float(sc[pi]))
             if hit:
                 used[j] = True
+                mscore[j] = float(sc[pi])
                 tps[bname].append(1.0)
             else:
                 tps[bname].append(0.0)
@@ -127,7 +129,12 @@ def run(weights, imgsz, tag):
         if (i + 1) % 100 == 0:
             print("  %s  %d/%d" % (tag, i + 1, len(names)), flush=True)
 
-    res = {"imgsz": imgsz, "images": len(names), "iou": IOU_T, "buckets": {}}
+        for bi, (bname, _, _) in enumerate(BUCKETS):
+            m = gt_bucket == bi
+            if m.any():
+                nhit30[bname] += int((mscore[m] >= RECALL_CONF).sum())
+
+    res = {"imgsz": imgsz, "images": len(names), "iou": IOU_T, "recall_conf": RECALL_CONF, "buckets": {}}
     for name, lo, hi in BUCKETS:
         a = ap_from_scores(np.array(scores[name]), np.array(tps[name]), ngt[name])
         res["buckets"][name] = {
@@ -135,6 +142,7 @@ def run(weights, imgsz, tag):
             "n_gt": ngt[name],
             "n_pred": len(scores[name]),
             "ap50": None if a is None else round(a, 4),
+            "recall": None if ngt[name] == 0 else round(nhit30[name] / float(ngt[name]), 4),
         }
     with open(os.path.join(OUT_DIR, "ap_by_size_%s.json" % tag), "w", encoding="utf-8") as f:
         json.dump(res, f, ensure_ascii=False, indent=1)
@@ -143,8 +151,8 @@ def run(weights, imgsz, tag):
 
 if __name__ == "__main__":
     jobs = [
-        (_os.path.join(KROOT, 'runs', 'ship_416_v1', 'weights', 'best.pt'), 416, "416"),
-        (_os.path.join(KROOT, 'runs', 'ship_640_v1', 'weights', 'best.pt'), 640, "640"),
+        (r"D:\rs-yolo\runs\ship_416_v1\weights\best.pt", 416, "416"),
+        (r"D:\rs-yolo\runs\ship_640_v1\weights\best.pt", 640, "640"),
     ]
     allres = {}
     for w, s, tag in jobs:

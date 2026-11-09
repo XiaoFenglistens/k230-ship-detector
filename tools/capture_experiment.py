@@ -12,8 +12,6 @@ B 实验：拍摄条件 -> 检出率曲线
 用法：
     python tools/capture_experiment.py --n 200
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 import argparse
 import json
 import os
@@ -25,10 +23,10 @@ import torch
 from PIL import Image, ImageFilter
 from ultralytics import YOLO
 
-IMG_DIR = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'images', 'val')
-LBL_DIR = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'labels', 'val')
-WEIGHTS = _os.path.join(KROOT, 'runs', 'ship_416_v1', 'weights', 'best.pt')
-OUT = _os.path.join(KROOT, 'runs', 'capture_experiment.json')
+IMG_DIR = r"D:\rs-yolo\datasets\sodaa_ship_hbb\images\val"
+LBL_DIR = r"D:\rs-yolo\datasets\sodaa_ship_hbb\labels\val"
+WEIGHTS = r"D:\rs-yolo\runs\ship_416_v1\weights\best.pt"
+OUT = r"D:\rs-yolo\runs\capture_experiment.json"
 
 # 有效像素保留比例 k（1.0 = 原图直送；0.5 = 目标像素只剩一半）
 LEVELS = [1.0, 0.75, 0.55, 0.40, 0.28, 0.18]
@@ -132,7 +130,7 @@ def main():
 
     torch.cuda.set_per_process_memory_fraction(0.85)
     model = YOLO(WEIGHTS)
-    tmp = os.path.join(os.environ.get("TEMP", _os.path.join(KROOT, 'tmp')), "_cap_tmp.jpg")
+    tmp = os.path.join(os.environ.get("TEMP", r"D:\rs-yolo\tmp"), "_cap_tmp.jpg")
     os.makedirs(os.path.dirname(tmp), exist_ok=True)
 
     rows = []

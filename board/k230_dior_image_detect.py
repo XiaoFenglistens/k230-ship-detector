@@ -1,5 +1,3 @@
-# SPDX-FileCopyrightText: 2026 XiaoFenglistens
-# SPDX-License-Identifier: MIT
 # -*- coding: utf-8 -*-
 """K230 影像文件检测（不用摄像头）
 

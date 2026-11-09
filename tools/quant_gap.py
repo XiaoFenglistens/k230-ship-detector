@@ -9,8 +9,6 @@
 用法：
     python tools\quant_gap.py --n 60
 """
-import os as _os
-KROOT = _os.environ.get("K230_ROOT", ".")  # 项目根目录，默认当前目录
 
 import os
 import sys
@@ -33,14 +31,31 @@ import nncase
 import nncase_kpu  # noqa
 import onnxruntime as ort
 
-ROOT = _os.path.join(KROOT, 'runs', 'ship_416_v1', 'weights')
+_ROOT = os.environ.get("K230_ROOT", r"D:\rs-yolo")
+
+ROOT = _ROOT + r"\runs\ship_416_v1\weights"
 KMODEL = os.path.join(ROOT, "best.kmodel")
 ONNX = os.path.join(ROOT, "best.onnx")
-IMG_DIR = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'images', 'val')
-LBL_DIR = _os.path.join(KROOT, 'datasets', 'sodaa_ship_hbb', 'labels', 'val')
-OUT = _os.path.join(KROOT, 'runs', 'quant_gap.json')
+IMG_DIR = _ROOT + r"\datasets\sodaa_ship_hbb\images\val"
+LBL_DIR = _ROOT + r"\datasets\sodaa_ship_hbb\labels\val"
+OUT = _ROOT + r"\runs\quant_gap.json"
 
 SIZE = 416
+
+# 允许用 --run / --size 切换到别的尺寸（512 等）
+_RUN_ARG = None
+for _i, _a in enumerate(sys.argv):
+    if _a == "--run":
+        _RUN_ARG = sys.argv[_i + 1]
+    elif _a == "--size":
+        SIZE = int(sys.argv[_i + 1])
+if _RUN_ARG:
+    ROOT = _RUN_ARG if os.path.isabs(_RUN_ARG) else os.path.join(_ROOT + r"\runs", _RUN_ARG)
+    if not ROOT.endswith("weights"):
+        ROOT = os.path.join(ROOT, "weights")
+    KMODEL = os.path.join(ROOT, "best.kmodel")
+    ONNX = os.path.join(ROOT, "best.onnx")
+    OUT = _ROOT + r"\runs\quant_gap_%s.json" % os.path.basename(os.path.dirname(ROOT))
 NC = 1
 CONF = 0.001        # AP 用低阈值，才能画出完整 PR 曲线
 NMS_IOU = 0.45
@@ -170,7 +185,7 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--kmodel", default=KMODEL)
     ap.add_argument("--out", default=OUT)
-    args = ap.parse_args()
+    args, _unknown = ap.parse_known_args()  # --run/--size 已在导入时消费
 
     files = sorted(glob.glob(os.path.join(IMG_DIR, "*.jpg")))
     rng = np.random.RandomState(args.seed)
