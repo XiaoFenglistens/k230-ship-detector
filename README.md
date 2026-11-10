@@ -206,9 +206,9 @@ models/     kmodel（416/512 单类 int8、20 类 int8、20 类 a16 生产版）
 }
 ```
 
-- 概念 DOI（永远指向最新版）：[10.5281/zenodo.23976727](https://doi.org/10.5281/zenodo.23976727)
-- 已归档的最新快照是 v1.0.2：[10.5281/zenodo.23976728](https://zenodo.org/records/23976728)
-  （v1.1.0 尚未归档：Zenodo 的自动归档开关当前是关闭的，需要「拨 ON → 发 Release → 拨回 OFF」才会生成新快照）
+- 概念 DOI（永远指向最新版）：[10.5281/zenodo.23976727](https://doi.org/10.5281/zenodo.23976727) → 当前解析到 **v1.1.0**
+- 各版本快照：[v1.1.0 · 2026-11-10](https://zenodo.org/records/24101205)（13.34 MB）、[v1.0.2 · 2026-11-05](https://zenodo.org/records/23976728)（10.15 MB）
+- 归档方式：v1.0.2 由 Zenodo 的 GitHub 集成自动抓取；v1.1.0 因 `github.com` 在本机被间歇性阻断，改为在 Zenodo 网页用 `New version` 手动上传同一 tag 的 `git archive` 包（md5 与本地一致）
 
 ## 致谢
 
